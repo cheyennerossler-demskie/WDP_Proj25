@@ -65,7 +65,7 @@ nav a:hover {
 	font-weight: bold;
 	text-transform: uppercase;
 	font-style: italic;
-	text-shadow: 2px 1px 3px black;
+	text-shadow: 2px 1px 30px black;
 }
 
 .list{
