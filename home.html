@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- Cheyenne Rossler-Demskie -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="images/PassKeylogo.png" type="image/icon">
+	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">-->
+	<script src="https://kit.fontawesome.com/c72632c042.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+		<img src= "images/PassKeylogo.png" alt="PassKey-logo">
+		<!--<h1>Home</h1>-->
+		<nav>
+			<a href="register.html">Register</a>
+			<a href="login.html">Log In</a>
+		</nav>
+		<div class="about">
+			<h2>Privacy is <span class="mission">Key</span></h2>
+			<p class="list">
+				<i><i class="fa-solid fa-key"></i> Manage your passwords!<br>
+				<i><i class="fa-solid fa-key"></i> Generate unique passwords!<br>
+				<i><i class="fa-solid fa-key"></i> Save notes about each password!</br>
+			</p>
+		</div>
+	</header>
+	<main>
+		<p>Save a Note</p>
+		<div class="home-form">
+			<form>
+				<label for="title">Title:</label><br>
+				<input type="text" id="title" name="title"><br>
+				<i class="fa-solid fa-pen"></i>
+				<label for="note">Note:</label><br>
+				<textarea id="note" name="note"></textarea><br>
+				<label for="date">Date:</label><br>
+				<input type="date" id="date" name="date"><br>
+				<input type="submit" value="Save" class="button">
+			</form>
+		</div>
+	</main>
+	<footer>
+		<h3>PassKey &copy;</h3>
+	</footer>
+</body>
+</html>

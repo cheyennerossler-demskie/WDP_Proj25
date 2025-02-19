@@ -1,0 +1,116 @@
+body{
+	background-image: url(images/logo2.png);
+	background-repeat:repeat-x;
+}
+
+header{
+	font-family: monospace;
+	font-size: large;
+}
+
+main{
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+/*h1{
+	color: lightgray;
+	text-align: center;
+	text-shadow: 2px 5px 5px rgb(63, 46, 139);
+	font-style: oblique;
+}
+*/
+
+img{
+	display: block;
+	margin: auto;
+	width: 140px;
+	padding: 5px;
+	background-color: rgb(218, 223, 213);
+}
+
+h2{
+	color:blueviolet;
+	text-shadow: 2px 2px 3px rgb(207, 206, 206);
+}
+
+nav a{
+	background-color: rgb(221, 230, 211);
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	text-decoration: none;
+	font-size: large;
+	margin: 5px;
+	padding: 8px;
+	border-radius: 8px;
+}
+
+nav a:hover {
+	box-shadow: 2px 5px 5px chocolate;
+}
+  
+.about{
+	font-family: monospace;
+	background-color: rgb(165, 165, 165);
+	text-align: center;
+	font-size: large;
+	border-radius: 50px;
+	border-style: dotted;
+	border-width: thin;
+	margin: 20px;
+}
+
+.mission{
+	color: rgb(235, 149, 69);
+	font-weight: bold;
+	text-transform: uppercase;
+	font-style: italic;
+	text-shadow: 2px 1px 3px black;
+}
+
+.list{
+	color: black;
+	background-color: rgb(218, 223, 213);
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: medium;
+	padding: 10px;
+	border-radius: 40px;
+}
+
+p{
+	background-color: rgb(63, 46, 139);
+	color: white;
+	
+}
+
+.log{
+	margin-top: 120px;
+}
+
+.reg{
+	margin-top: 120px;
+}
+
+.reg-form{
+	margin-top: 200px;
+}
+
+.button{
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size: medium;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+footer{
+	background-color: rgb(218, 223, 213);
+	font-size: medium;
+	color: rgb(165, 165, 165);
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 55px;
+	text-align: center;
+}
+
