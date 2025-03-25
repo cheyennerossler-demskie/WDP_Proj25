@@ -13,5 +13,5 @@ PassKey is a full-stack web application designed as a secure password manager. I
 - **Backend**: Node.js, Express
 - **Database**: MySQL
 
-## ERD
-[Assignment#3ERD.drawio.pdf](https://github.com/user-attachments/files/19457198/Assignment.3ERD.drawio.pdf)
+## E-R Diagram
+![ERD](https://github.com/user-attachments/assets/b7d7ba48-f8b9-4ffa-b69a-f8e43dd3404b)
