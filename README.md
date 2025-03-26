@@ -15,3 +15,6 @@ PassKey is a full-stack web application designed as a secure password manager. I
 
 ## E-R Diagram
 ![ERD](https://github.com/user-attachments/assets/b7d7ba48-f8b9-4ffa-b69a-f8e43dd3404b)
+
+## Relations
+![Relations drawio](https://github.com/user-attachments/assets/92d7c215-2556-47fb-90a2-4e8d67bbf370)
