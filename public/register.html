@@ -19,22 +19,24 @@
 		</nav>
 	</header>
 	<main>
-		<p class="reg">Register below</p>
-		</div class="reg-form">
-			<form>
-				<label for="fname">First Name:</label><br>
-				<input type="text" id="fname" name="fname"><br>
-				<label for="lname">Last Name:</label><br>
-				<input type="text" id="lname" name="lname"><br>
+		<p class="regForm">Register below</p>
+		</div id="regForm">
+			<h1 id="welcome"></h1>
+			<form id="regForm">
+				<p id="error"></p>
+				<label for="firstname">First Name:</label><br>
+				<input type="text" id="firstname"><br>
+				<label for="lastname">Last Name:</label><br>
+				<input type="text" id="lastname"><br>
 				<i class="fa-solid fa-envelope"></i>
 				<label for="email">Email:</label><br>
-				<input type="text" id="email" name="email"><br>
+				<input type="text" id="email"><br>
 				<i class="fa-solid fa-user"></i>
-				<label for="uname">Username:</label><br>
-				<input type="text" id="uname" name="uname"><br>
+				<label for="username">Username:</label><br>
+				<input type="text" id="username"><br>
 				<i class="fa-solid fa-key"></i>
-				<label for="pw">Password:</label><br>
-				<input type="password" id="pw" name="pw"><br>
+				<label for="password">Password:</label><br>
+				<input type="password" id="password"><br>
 				<input type="submit" value="Submit" class="button">
 			</form>
 		<div>
@@ -42,5 +44,6 @@
 	<footer>
 		<h3>PassKey &copy;</h3>
 	</footer>
+	<script src="register.js"></script>
 </body>
 </html>

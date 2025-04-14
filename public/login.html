@@ -19,16 +19,17 @@
 		</nav>
 	</header>
 	<main>
-		<p class="log">Login below</p>
-		<div class="login-form">
-			<form>
+		<p class="loginForm">Login below</p>
+		<div id="loginForm">
+			<h1 id="welcome"></h1>
+			<form id="loginForm">
 				<p id="error"></p>
 				<i class="fa-solid fa-user"></i>
-				<label for="uname">Username:</label><br>
-				<input type="text" id="uname" name="uname"><br>
+				<label for="username">Username:</label><br>
+				<input type="text" id="username"><br>
 				<i class="fa-solid fa-key"></i>
-				<label for="pw">Password:</label><br>
-				<input type="password" id="pw" name="pw"><br>
+				<label for="password">Password:</label><br>
+				<input type="password" id="password"><br>
 				<input type="submit" value="Submit" class="button">
 			</form>
 		</div>
@@ -36,6 +37,6 @@
 	<footer>
 		<h3>PassKey &copy;</h3>
 	</footer>
-	<script src="main.js"></script>
+	<script src="login.js"></script>
 </body>
 </html>
