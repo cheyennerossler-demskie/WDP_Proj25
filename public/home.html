@@ -29,10 +29,12 @@
 	</header>
 	<main>
 		<p>Save a Note</p>
-		<div class="home-form">
-			<form>
+		<div id="noteForm">
+			<h1 id="saved"></h1>
+			<form id="noteForm">
+				<p id="error"></p>
 				<label for="title">Title:</label><br>
-				<input type="text" id="title" name="title"><br>
+				<input type="text" id="title"><br>
 				<i class="fa-solid fa-pen"></i>
 				<label for="note">Note:</label><br>
 				<textarea id="note" name="note"></textarea><br>
@@ -45,5 +47,6 @@
 	<footer>
 		<h3>PassKey &copy;</h3>
 	</footer>
+	<script src="note.js"></script>
 </body>
 </html>
