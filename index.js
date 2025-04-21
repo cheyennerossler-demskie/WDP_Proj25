@@ -2,12 +2,26 @@
 // specify we want to use express
 const express = require('express')
 const app = express()
+app.use(express.json())
 
-//const userRoutes = require("./server/routes/user")
-// do same for all entities
+// all entries
+const userRoutes = require("./server/routes/user")
+const passwordentryRoutes = require("./server/routes/passwordentry")
+const noteRoutes = require("./server/routes/note")
 
-//app.use("/users", userRoutes)
-// do same for all entities
+//CORS middleware
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");  
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");  
+    next();
+  });
+  
+// all entities
+app.use("/users", userRoutes)
+app.use("/passwordentry", passwordentryRoutes)
+app.use("/note", noteRoutes)
+
 
 const PORT = process.env.PORT || 3000; // mySQL benchmark - computer not using
 app.listen(PORT, () => console.log(`Server started on port ${PORT}!`));
