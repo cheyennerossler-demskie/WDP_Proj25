@@ -43,7 +43,7 @@ try {
 router.delete('/deleteAccount', async (req, res) => {
 try {
     await User.deleteAccount(req.body)
-    res.send({success: "HOW DARE YOU!!! I did everything for you!!!!! You will come to regret this...this is a THREAT!!! >:(((("})
+    res.send({success: "Fine, be that way. Bye!"})
 } catch(err) {
     res.status(401).send({message: err.message})
 }

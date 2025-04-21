@@ -21,7 +21,7 @@ async function getAllUsers() {
 }
 
 // READ in CRUD: Logging in a user
-async function login(user) {
+async function login(User) {
   let cUser = await userExists(User.Username)
   if(!cUser[0]) throw Error("Username does not exist!") 
   if(cUser[0].password != user.Password) throw Error("Password is incorrect!")
@@ -73,7 +73,7 @@ const user = {
 async function deleteAccount(user) {
   let sql = `
     DELETE FROM User
-    WHERE UserID = ${user.userId}
+    WHERE UserID = ${User.userID}
   `
   await con.query(sql)
 }
