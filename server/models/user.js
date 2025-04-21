@@ -24,22 +24,22 @@ async function getAllUsers() {
 async function login(User) {
   let cUser = await userExists(User.Username)
   if(!cUser[0]) throw Error("Username does not exist!") 
-  if(cUser[0].password != user.Password) throw Error("Password is incorrect!")
+  if(cUser[0].password != User.Password) throw Error("Password is incorrect!")
     
   return cUser[0]
 }
 
-async function userExists(username) {
+async function userExists(Username) {
   let sql = `
     SELECT * FROM User
-    WHERE UserName="${username}"
+    WHERE UserName="${Username}"
   `
   return await con.query(sql)
 }
 
 // CREATE in CRUD - Registering a user
 async function register(User) {
-  const cUser = await userExists(user.Username)
+  const cUser = await userExists(User.Username)
   if(cUser.length > 0) throw Error("Username already in use!")
 
   let sql = `
@@ -63,17 +63,17 @@ async function editUsername(User) {
 }
 
 // USER Example:
-const user = {
+const User = {
   Username: "CheyenneRD",
   Email: "chey@gmail.com",
   Password: "cheyspass",
   FirstName: "Cheyenne",
   LastName: "Rossler-Demskie"
 }
-async function deleteAccount(user) {
+async function deleteAccount(User) {
   let sql = `
     DELETE FROM User
-    WHERE UserID = ${User.userID}
+    WHERE UserID = ${User.UserID}
   `
   await con.query(sql)
 }
