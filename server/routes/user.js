@@ -5,18 +5,18 @@ const router = express.Router()
 // http method for each CRUD function
 router.get("/getAllUsers", (req, res) => {
     try{
-        const users = User.getAllUsers()
-        res.send(users)
+        const Users = User.getAllUsers()
+        res.send(Users)
     }
     catch(err){
-        res.status(401).send({message: error.message})
+        res.status(401).send({message: err.message})
     }
 })
 
 router.post('/login', async (req, res) =>{
     try {
-      const user = await User.login(req.body)
-      res.send({...user, password: undefined})
+      const User = await User.login(req.body)
+      res.send({...User, Password: undefined})
     } catch(err) {
       res.status(401).send({message: err.message})
     }
@@ -24,14 +24,14 @@ router.post('/login', async (req, res) =>{
   
 router.post('/register', async (req, res) => {
 try {
-    const user = await User.register(req.body)
-    res.send({...user, password: undefined})
+    const User = await User.register(req.body)
+    res.send({...User, Password: undefined})
 } catch(err) {
     res.status(401).send({message: err.message})
 }
 })
 
-router.put('/editUsername', async (req, res) => {
+/*router.put('/editUsername', async (req, res) => {
 try {
     const user = await User.editUsername(req.body)
     res.send({...user, password: undefined})
@@ -39,6 +39,7 @@ try {
     res.status(401).send({message: err.message})
 }
 })
+*/
 
 router.delete('/deleteAccount', async (req, res) => {
 try {

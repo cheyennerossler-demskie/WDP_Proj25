@@ -2,8 +2,9 @@
 // specify we want to use express
 const express = require('express')
 const app = express()
-app.use(express.json())
+const path = require("path")
 
+app.use(express.json())
 
 // all entries
 const userRoutes = require("./server/routes/user")
