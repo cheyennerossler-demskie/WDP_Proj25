@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 
+
 // all entries
 const userRoutes = require("./server/routes/user")
 const passwordentryRoutes = require("./server/routes/passwordentry")
