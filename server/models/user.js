@@ -13,16 +13,25 @@ async function createTable() {
   await con.query(sql)  
 }
 
-createTable();
+createTable()
 
 // USER Example:
-const User = {
+const User = [
+{
   UserName: "CheyenneRD",
   Email: "chey@gmail.com",
   Password: "cheyspass",
   FirstName: "Cheyenne",
   LastName: "Rossler-Demskie"
+},
+{
+  UserName: "Sabrina",
+  Email: "sabrina@gmail.com",
+  Password: "witch",
+  FirstName: "Sabrina",
+  LastName: "Rossler-Demskie"
 }
+]
 
 // CRUD Operations
 async function getAllUsers() {

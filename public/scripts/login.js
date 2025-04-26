@@ -1,6 +1,8 @@
 let loginForm = document.getElementById('loginForm')
 loginForm.addEventListener('submit', login)
 
+import { fetchData } from "./main.js"
+
 function login(e){
     e.preventDefault()
     let errorSection = document.getElementById("error")

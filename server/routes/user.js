@@ -3,7 +3,7 @@ const User = require("../models/user")
 const router = express.Router()
 
 // http method for each CRUD function
-router.get("/getAllUsers", (req, res) => {
+router.get("/getUsers", (req, res) => {
     try{
         const Users = User.getAllUsers()
         res.send(Users)
@@ -31,15 +31,14 @@ try {
 }
 })
 
-/*router.put('/editUsername', async (req, res) => {
+router.put('/update', async (req, res) => {
 try {
-    const user = await User.editUsername(req.body)
-    res.send({...user, password: undefined})
+    const User = await User.updateUsername(req.body)
+    res.send({...User, password: undefined})
 } catch(err) {
     res.status(401).send({message: err.message})
 }
 })
-*/
 
 router.delete('/deleteAccount', async (req, res) => {
 try {

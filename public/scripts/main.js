@@ -13,7 +13,7 @@ async function fetchData(route = '', data = {}, methodType) {
       throw await response.json();
     }
   }
-  // window.alert("Welcome to Class!!!! :)")
+  // window.alert("Welcome to Passkey!")
   let loginForm = document.getElementById('loginForm')
   if(loginForm) loginForm.addEventListener('submit', login)
   
@@ -34,11 +34,11 @@ async function fetchData(route = '', data = {}, methodType) {
         Password: password
       }
   
-      fetchData('/users/login', user, "POST")
+      fetchData('/user/login', user, "POST")
       .then(data => {
         if(!data.message) {
           setCurrentUser(data)
-          window.location.href = "food.html"
+          window.location.href = "home.html"
         }
       })
       .catch(err => {
@@ -73,27 +73,29 @@ async function fetchData(route = '', data = {}, methodType) {
       Password: document.getElementById("password").value
     }
   
-    fetchData("/users/register", user, "POST")
+    fetchData("/user/register", user, "POST")
     .then(data => {
       if(!data.message) {
         setCurrentUser(data)
-        window.location.href = "food.html"
+        window.location.href = "home.html"
       }
     })
     .catch(err => {
       errorSection.innerText = `${err.message}`
     })
   }  
-  
+
   // local storage functions
   function setCurrentUser(user) {
-    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('User', JSON.stringify(user))
   }
   
   function getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'))
+    return JSON.parse(localStorage.getItem('User'))
   }
   
   function removeCurrentUser() {
-    localStorage.removeItem('user')
+    localStorage.removeItem('User')
   }
+
+  export { fetchData }

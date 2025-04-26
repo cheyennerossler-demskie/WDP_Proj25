@@ -1,6 +1,8 @@
 let noteForm = document.getElementById('noteForm')
 noteForm.addEventListener('submit', save)
 
+import { fetchData } from "./main.js"
+
 function save(e){
     e.preventDefault()
     let errorSection = document.getElementById("error")
