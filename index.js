@@ -23,9 +23,9 @@ app.use(function(req, res, next) {
   });
   
 // all entities
-app.use("/user", userRoutes)
-//app.use("/passwordentry", passwordentryRoutes)
-//app.use("/note", noteRoutes)
+app.use("/users", userRoutes)
+app.use("/passwordentry", passwordentryRoutes)
+app.use("/note", noteRoutes)
 
 
 const PORT = process.env.PORT || 3000 // mySQL benchmark - computer not using

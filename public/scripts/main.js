@@ -87,7 +87,7 @@ async function fetchData(route = '', data = {}, methodType) {
 
   // local storage functions
   function setCurrentUser(user) {
-    localStorage.setItem('User', JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify(user))
   }
   
   function getCurrentUser() {
@@ -95,7 +95,7 @@ async function fetchData(route = '', data = {}, methodType) {
   }
   
   function removeCurrentUser() {
-    localStorage.removeItem('User')
+    localStorage.removeItem('user')
   }
 
   export { fetchData }
