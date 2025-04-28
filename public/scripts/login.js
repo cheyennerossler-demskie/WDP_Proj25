@@ -1,7 +1,7 @@
-let loginForm = document.getElementById('loginForm')
-loginForm.addEventListener('submit', login)
-
 import { fetchData } from "./main.js"
+
+let loginForm = document.getElementById('loginForm')
+if (loginForm) loginForm.addEventListener('submit', login)
 
 function login(e){
     e.preventDefault()
@@ -16,22 +16,76 @@ function login(e){
     else {
         errorSection.innerText = ""  
         console.log(username)
-    }
 
     const user = {
         username: username,
         password: password
     }
 
+    fetchData('/users/login', user, "POST")
+    .then(data => {
+      if(!data.message) {
+        setCurrentUser(data)
+        window.location.href = "home.html"
+      }
+    })
+    .catch(err => {
+      errorSection.innerText = `${err.message}`
+    })
+
     let section = document.getElementById("welcome")
     section.innerHTML = `Welcome, ${username}!`
 
     console.log(user)
-}
+    }
 
-document.getElementById('username').value = ""
-document.getElementById('password').value = ""
+    document.getElementById('username').value = ""
+    document.getElementById('password').value = ""
+}
 
 function validString(word) {
     return word == ""
+}
+
+// register form code
+let registerForm = document.getElementById("registerForm")
+if(registerForm) registerForm.addEventListener('submit', register)
+
+function register(e) {
+  e.preventDefault() 
+
+  let errorSection = document.getElementById("error")
+
+  const user = {
+    Username: document.getElementById("username").value,
+    Password: document.getElementById("password").value
+  }
+
+  fetchData("/users/register", user, "POST")
+  .then(data => {
+    if(!data.message) {
+      setCurrentUser(data)
+      window.location.href = "login.html"
+    }
+  })
+  .catch(err => {
+    errorSection.innerText = `${err.message}`
+  })
+}  
+
+// local storage functions
+function setCurrentUser(user) {
+  localStorage.setItem('user', JSON.stringify(user))
+}
+
+export function getCurrentUser() {
+  return JSON.parse(localStorage.getItem('user'))
+}
+// example accessing userId for second entity
+// let currentUser = getCurrentUser()
+// let userId = currentUser.userId
+
+export function removeCurrentUser() {
+  localStorage.removeItem('user')
+  window.location.href = "index.html"
 }

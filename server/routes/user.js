@@ -5,8 +5,8 @@ const router = express.Router()
 // http method for each CRUD function
 router.get("/getUsers", (req, res) => {
     try{
-        const Users = User.getAllUsers()
-        res.send(Users)
+        const users = User.getAllUsers()
+        res.send(users)
     }
     catch(err){
         res.status(401).send({message: err.message})

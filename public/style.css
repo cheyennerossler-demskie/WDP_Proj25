@@ -34,7 +34,7 @@ h2{
 	text-shadow: 2px 2px 3px rgb(207, 206, 206);
 }
 
-nav a{
+/*nav a{
 	background-color: rgb(221, 230, 211);
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	text-decoration: none;
@@ -43,9 +43,26 @@ nav a{
 	padding: 8px;
 	border-radius: 8px;
 }
+*/
 
-nav a:hover {
+header nav ul {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-around;
+	background-color: rgb(218, 223, 213);
+	padding: 10px;
+}
+  
+header nav ul li a {
+	text-decoration: none;
+	font-size: 18px;
+	color: rgb(64, 61, 61);
+	text-transform: uppercase;
+}
+
+header nav ul li a:hover {
 	box-shadow: 2px 5px 5px chocolate;
+	color: black;
 }
   
 .about{
