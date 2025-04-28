@@ -15,24 +15,6 @@ async function createTable() {
 
 createTable()
 
-// USER Example:
-const User = [
-{
-  UserName: "CheyenneRD",
-  Email: "chey@gmail.com",
-  Password: "cheyspass",
-  FirstName: "Cheyenne",
-  LastName: "Rossler-Demskie"
-},
-{
-  UserName: "Sabrina",
-  Email: "sabrina@gmail.com",
-  Password: "witch",
-  FirstName: "Sabrina",
-  LastName: "Rossler-Demskie"
-}
-]
-
 // CRUD Operations
 async function getAllUsers() {
   let sql = `SELECT * FROM User`
@@ -48,68 +30,86 @@ async function userExists(UserName) {
 }
 
 // READ in CRUD: Logging in a user
-async function login(User) {
-  let cUser = await userExists(User)
+async function login(user) {
+  let cUser = await userExists(user)
   if(!cUser[0]) throw Error("Username does not exist!") 
-  if(cUser[0].Password != User.Password) throw Error("Password is incorrect!")
+  if(cUser[0].Password != user.Password) throw Error("Password is incorrect!")
     
   return cUser[0]
 }
 
 // CREATE in CRUD - Registering a user
-async function register(User) {
-  const cUser = await userExists(User.UserName)
+async function register(user) {
+  const cUser = await userExists(user.UserName)
   if(cUser.length > 0) throw Error("Username already in use!")
 
   let sql = `
     INSERT INTO User(UserPasswordEntry, UserName, UserEmail, UserFirstName, UserlastName)
-    VALUES("${User.Password}", "${User.UserName}", "${User.Email}", "${User.FirstName}", "${User.LastName}")
+    VALUES("${user.Password}", "${user.UserName}", "${user.Email}", "${User.FirstName}", "${user.LastName}")
   `
   await con.query(sql)
-  let newUser = await login(User)
+
   return await login(User)
 }
 
 async function updateUsername(User) {
   let sql = `
     UPDATE User SET
-    UserName = "${User.UserName}"
-    WHERE UserID = ${User.UserID}
+    UserName = "${user.UserName}"
+    WHERE UserID = ${user.UserID}
   `
   await con.query(sql)
-  const currentUser = await userExists(User.UserName)
+  const currentUser = await userExists(user.UserName)
   return currentUser[0]
 }
 
 //U for Update - Update email of user
-async function updateEmail(User) {
-  let cEmail = await getEmail(User)
+async function updateEmail(user) {
+  let cEmail = await getEmail(user)
   if(cEmail) throw Error("Email already in use!!")
 
   let sql = `
-    UPDATE User SET Email="${User.Email}"
-    WHERE UserName="${User.UserName}"
+    UPDATE User SET Email="${user.Email}"
+    WHERE UserName="${user.UserName}"
   `
   await con.query(sql)
-  let updatedUser = await userExists(User)
+  let updatedUser = await userExists(user)
   return updatedUser[0]
 }
 
 async function getEmail(user) {
   let sql = `
     SELECT Email FROM User
-    WHERE Email="${User.Email}"
+    WHERE Email="${user.Email}"
   `
   let email = await con.query(sql)
   return email[0]
 }
 
-async function deleteAccount(User) {
+async function deleteAccount(user) {
   let sql = `
     DELETE FROM User
-    WHERE UserName = ${User.UserName}
+    WHERE UserName = ${user.UserName}
   `
   await con.query(sql)
 }
+
+// USER Example:
+const user = [
+  {
+    UserName: "CheyenneRD",
+    Email: "chey@gmail.com",
+    Password: "cheyspass",
+    FirstName: "Cheyenne",
+    LastName: "Rossler-Demskie"
+  },
+  {
+    UserName: "Sabrina",
+    Email: "sabrina@gmail.com",
+    Password: "witch",
+    FirstName: "Sabrina",
+    LastName: "Rossler-Demskie"
+  }
+  ]
 
 module.exports = { getAllUsers, login, register, updateUsername, updateEmail, deleteAccount }

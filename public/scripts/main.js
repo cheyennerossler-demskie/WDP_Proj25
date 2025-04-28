@@ -23,7 +23,6 @@ const logout = document.getElementById("logout")
 if(logout) logout.addEventListener('click', removeCurrentUser)
 
 // Fetch method implementation:
-// Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {
   const response = await fetch(`http://localhost:3000${route}`, {
     method: methodType, // *POST, PUT, DELETE, etc.

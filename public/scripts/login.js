@@ -11,22 +11,21 @@ function login(e){
     let password = document.getElementById('password').value
 
     if(validString(username)) {
-        errorSection.innerText = `Username cannot be blank!!!`
+        errorSection.innerText = `Username cannot be blank!`
     } 
     else {
         errorSection.innerText = ""  
-        console.log(username)
 
     const user = {
-        username: username,
-        password: password
+        Username: username,
+        Password: password
     }
 
     fetchData('/users/login', user, "POST")
     .then(data => {
       if(!data.message) {
         setCurrentUser(data)
-        window.location.href = "home.html"
+        window.location.href = "index.html"
       }
     })
     .catch(err => {
@@ -58,14 +57,17 @@ function register(e) {
 
   const user = {
     Username: document.getElementById("username").value,
-    Password: document.getElementById("password").value
+    Password: document.getElementById("password").value,
+    FirstName: document.getElementById("firstName").value,
+    LastName: document.getElementById("lastName").value,
+    Email: document.getElementById("email").value
   }
 
   fetchData("/users/register", user, "POST")
   .then(data => {
     if(!data.message) {
       setCurrentUser(data)
-      window.location.href = "login.html"
+      window.location.href = "index.html"
     }
   })
   .catch(err => {
