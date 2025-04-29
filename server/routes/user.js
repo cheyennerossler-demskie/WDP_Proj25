@@ -17,6 +17,7 @@ router
 
 .post('/login', async (req, res) =>{
     try {
+      console.log("hi fromlogin route")
       const user = await User.login(req.body)
       res.send({...user, password: undefined})
     } catch(err) {
@@ -42,7 +43,7 @@ router
     }
 })
 
-router.delete('/deleteAccount', async (req, res) => {
+.delete('/deleteAccount', async (req, res) => {
     try {
         await User.deleteAccount(req.body)
         res.send({success: "Fine, be that way. Bye!"})

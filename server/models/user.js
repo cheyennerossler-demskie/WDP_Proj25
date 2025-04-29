@@ -23,6 +23,7 @@ async function getAllUsers() {
 
 // READ in CRUD: Logging in a user
 async function login(user) {
+  console.log("Login Beg: " + user)
   let cUser = await userExists(user.UserName)
   console.log("Login: " + cUser[0])
   console.log("Login 2: "+user)
