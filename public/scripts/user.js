@@ -17,12 +17,13 @@ function login(e){
         errorSection.innerText = ""  
 
     const user = {
-        Username: username,
+        UserName: username,
         Password: password
     }
 
     fetchData('/users/login', user, "POST")
     .then(data => {
+      console.log(data);
       if(!data.message) {
         setCurrentUser(data)
         window.location.href = "index.html"
@@ -30,6 +31,7 @@ function login(e){
     })
     .catch(err => {
       errorSection.innerText = `${err.message}`
+      console.log(err.message);
     })
 
     let section = document.getElementById("welcome")
@@ -56,7 +58,7 @@ function register(e) {
   let errorSection = document.getElementById("error")
 
   const user = {
-    Username: document.getElementById("username").value,
+    UserName: document.getElementById("username").value,
     Password: document.getElementById("password").value,
     FirstName: document.getElementById("firstName").value,
     LastName: document.getElementById("lastName").value,

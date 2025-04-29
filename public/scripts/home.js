@@ -1,4 +1,4 @@
-import { getCurrentUser, removeCurrentUser } from "./login.js";
+import { getCurrentUser, removeCurrentUser } from "./user.js";
 import { fetchData } from "./main.js";
 
 const user = getCurrentUser()

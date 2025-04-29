@@ -21,21 +21,21 @@ async function getAllUsers() {
   return await con.query(sql)
 }
 
-async function userExists(UserName) {
-  let sql = `
-    SELECT * FROM User
-    WHERE UserName="${UserName}"
-  `
-  return await con.query(sql)
-}
-
 // READ in CRUD: Logging in a user
 async function login(user) {
-  let cUser = await userExists(user)
+  let cUser = await userExists(user.UserName)
   if(!cUser[0]) throw Error("Username does not exist!") 
-  if(cUser[0].Password != user.Password) throw Error("Password is incorrect!")
+  if(cUser[0].password != user.UserPasswordHash) throw Error("Password is incorrect!")
     
   return cUser[0]
+}
+
+async function userExists(username) {
+  let sql = `
+    SELECT * FROM User
+    WHERE UserName="${username}"
+  `
+  return await con.query(sql)
 }
 
 // CREATE in CRUD - Registering a user
@@ -45,24 +45,25 @@ async function register(user) {
 
   let sql = `
     INSERT INTO User(UserPasswordEntry, UserName, UserEmail, UserFirstName, UserlastName)
-    VALUES("${user.Password}", "${user.UserName}", "${user.Email}", "${User.FirstName}", "${user.LastName}")
+    VALUES("${user.UserPasswordHash}", "${user.UserName}", "${user.Email}", "${user.UserFirstName}", "${user.UserLastName}")
   `
   await con.query(sql)
 
-  return await login(User)
+  return await login(user)
 }
 
-async function updateUsername(User) {
+async function updateUsername(user) {
   let sql = `
     UPDATE User SET
-    UserName = "${user.UserName}"
+    username = "${user.username}"
     WHERE UserID = ${user.UserID}
   `
   await con.query(sql)
-  const currentUser = await userExists(user.UserName)
+  const currentUser = await userExists(user.username)
   return currentUser[0]
 }
 
+/*
 //U for Update - Update email of user
 async function updateEmail(user) {
   let cEmail = await getEmail(user)
@@ -85,31 +86,23 @@ async function getEmail(user) {
   let email = await con.query(sql)
   return email[0]
 }
+*/
+
+// USER Example:
+const user = {
+    UserName: "CheyenneRD",
+    Email: "chey@gmail.com",
+    UserPasswordHash: "cheyspass",
+    UserFirstName: "Cheyenne",
+    UserLastName: "Rossler-Demskie"
+ }
 
 async function deleteAccount(user) {
   let sql = `
     DELETE FROM User
-    WHERE UserName = ${user.UserName}
+    WHERE UserID = ${user.UserID}
   `
   await con.query(sql)
 }
 
-// USER Example:
-const user = [
-  {
-    UserName: "CheyenneRD",
-    Email: "chey@gmail.com",
-    Password: "cheyspass",
-    FirstName: "Cheyenne",
-    LastName: "Rossler-Demskie"
-  },
-  {
-    UserName: "Sabrina",
-    Email: "sabrina@gmail.com",
-    Password: "witch",
-    FirstName: "Sabrina",
-    LastName: "Rossler-Demskie"
-  }
-  ]
-
-module.exports = { getAllUsers, login, register, updateUsername, updateEmail, deleteAccount }
+module.exports = { getAllUsers, login, register, updateUsername, deleteAccount }
