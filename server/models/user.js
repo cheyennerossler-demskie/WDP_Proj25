@@ -24,6 +24,8 @@ async function getAllUsers() {
 // READ in CRUD: Logging in a user
 async function login(user) {
   let cUser = await userExists(user.UserName)
+  console.log("Login: " + cUser[0])
+  console.log("Login 2: "+user)
   if(!cUser[0]) throw Error("Username does not exist!") 
   if(cUser[0].password != user.UserPasswordHash) throw Error("Password is incorrect!")
     
@@ -31,6 +33,7 @@ async function login(user) {
 }
 
 async function userExists(username) {
+  console.log("Exists: " + username)
   let sql = `
     SELECT * FROM User
     WHERE UserName="${username}"
@@ -44,10 +47,14 @@ async function register(user) {
   if(cUser.length > 0) throw Error("Username already in use!")
 
   let sql = `
-    INSERT INTO User(UserPasswordEntry, UserName, UserEmail, UserFirstName, UserlastName)
+    INSERT INTO User(UserPasswordHash, UserName, UserEmail, UserFirstName, UserlastName)
     VALUES("${user.UserPasswordHash}", "${user.UserName}", "${user.Email}", "${user.UserFirstName}", "${user.UserLastName}")
   `
   await con.query(sql)
+
+  console.log("hi from register: " + cUser)
+  console.log("hi from register: " + user)
+
 
   return await login(user)
 }
@@ -89,7 +96,7 @@ async function getEmail(user) {
 */
 
 // USER Example:
-const user = {
+const user2 = {
     UserName: "CheyenneRD",
     Email: "chey@gmail.com",
     UserPasswordHash: "cheyspass",

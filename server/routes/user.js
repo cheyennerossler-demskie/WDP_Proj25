@@ -4,9 +4,10 @@ const router = express.Router()
 
 // http method for each CRUD function
 router
-.get("/getUsers", (req, res) => {
+.get("/getUsers", async (req, res) => {
     try{
-        const users = User.getAllUsers()
+        const users = await User.getAllUsers()
+        console.log("users: " + users)
         res.send(users)
     }
     catch(err){
