@@ -56,8 +56,8 @@ async function register(user) {
 
   let sql = `
     INSERT INTO User(UserFirstName, UserLastName, UserPhoneNumber, UserEmail, UserName, UserPasswordHash)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `;
+    VALUES("${user.UserFirstName}", "${user.UserLastName}", "${user.UserPhoneNumber}", "${user.UserEmail}", "${user.UserName}", "${hashedPassword}")
+  `
 
   //await con.query(sql)
 

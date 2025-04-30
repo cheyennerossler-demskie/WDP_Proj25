@@ -70,7 +70,7 @@ function register(e) {
   .then(data => {
     if(!data.message) {
       setCurrentUser(data)
-      window.location.href = "index.html"
+      window.location.href = "home.html"
     }
   })
   .catch(err => {
@@ -80,21 +80,13 @@ function register(e) {
 
 // local storage functions
 function setCurrentUser(user) {
-  //localStorage.setItem('user', JSON.stringify(user))
-  // Store the user's first name and other info in localStorage
-  localStorage.setItem('user', JSON.stringify({
-    firstName: user.UserFirstName,
-    lastName: user.UserLastName,
-    username: user.UserName,
-    email: user.UserEmail,
-    phoneNumber: user.UserPhoneNumber,
-    password: user.UserPasswordHash,
-  }));
+  localStorage.setItem('user', JSON.stringify(user))
 }
 
 export function getCurrentUser() {
   return JSON.parse(localStorage.getItem('user'))
 }
+
 // example accessing userId for second entity
 // let currentUser = getCurrentUser()
 // let userId = currentUser.userId
