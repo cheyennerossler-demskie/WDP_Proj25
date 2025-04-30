@@ -18,3 +18,8 @@ PassKey is a full-stack web application designed as a secure password manager. I
 
 ## Relations
 ![Relations drawio](https://github.com/user-attachments/assets/92d7c215-2556-47fb-90a2-4e8d67bbf370)
+
+## Installs
+- npm init
+- npm i express dotenv mysql2
+- npm i nodemon --save-dev
