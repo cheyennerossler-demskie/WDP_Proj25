@@ -10,7 +10,7 @@ function login(e){
     let username = document.getElementById('username').value
     let password = document.getElementById('password').value
 
-    if(validString(username)) {
+    if(!validString(username)) {
         errorSection.innerText = `Username cannot be blank!`
     } 
     else {
@@ -45,7 +45,7 @@ function login(e){
 }
 
 function validString(word) {
-    return word == ""
+    return word === ""
 }
 
 // register form code
