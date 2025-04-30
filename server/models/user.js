@@ -1,5 +1,8 @@
 const con = require("./db_connect")
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 async function createTable() {
   let sql = `CREATE TABLE IF NOT EXISTS User (
     UserID INT PRIMARY KEY AUTO_INCREMENT,
@@ -32,7 +35,6 @@ async function login(user) {
 }
 
 async function userExists(username) {
-  console.log("Exists: " + username)
   let sql = `
     SELECT * FROM User
     WHERE UserName="${username}"
@@ -45,9 +47,12 @@ async function register(user) {
   const cUser = await userExists(user.UserName)
   if(cUser.length > 0) throw Error("Username already in use!")
 
+  // Hash the password before saving it
+  const hashedPassword = await bcrypt.hash(user.UserPasswordHash, saltRounds);
+
   let sql = `
-    INSERT INTO User(UserFirstName, UserLastName, UserLastName, UserEmail, UserName, UserPasswordHash)
-    VALUES("${user.UserFirstName}", "${user.UserLastName}", "${user.UserLastName}", "${user.UserEmail}", "${user.UserName}", "${user.UserPasswordHash}")
+    INSERT INTO User(UserFirstName, UserLastName, UserPhoneNumber, UserEmail, UserName, UserPasswordHash)
+    VALUES("${user.UserFirstName}", "${user.UserLastName}", "${user.UserPhoneNumber}", "${user.UserEmail}", "${user.UserName}", "${hashedPassword}")
   `
   await con.query(sql)
 

@@ -35,9 +35,6 @@ export async function fetchData(route = '', data = {}, methodType) {
     // console.log("response ok");
     return await response.json(); // parses JSON response into native JavaScript objects
   } else {
-    //const error = await response.json();
-    //console.error(error) // prints the error returned by the server.
-    //throw error
     throw await response.json();
   }
 }

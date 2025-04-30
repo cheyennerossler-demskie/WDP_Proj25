@@ -10,7 +10,7 @@ function login(e){
     let username = document.getElementById('username').value
     let password = document.getElementById('password').value
 
-    if(!validString(username)) {
+    if(validString(username)) {
         errorSection.innerText = `Username cannot be blank!`
     } 
     else {
@@ -26,7 +26,7 @@ function login(e){
       console.log(data);
       if(!data.message) {
         setCurrentUser(data)
-        window.location.href = "index.html"
+        window.location.href = "home.html"
       }
     })
     .catch(err => {
@@ -58,8 +58,8 @@ function register(e) {
   let errorSection = document.getElementById("error")
 
   const user = {
-    UserFirstName: document.getElementById("firstName").value,
-    UserLastName: document.getElementById("lastName").value,
+    UserFirstName: document.getElementById("firstname").value,
+    UserLastName: document.getElementById("lastname").value,
     UserPhoneNumber: document.getElementById("phonenumber").value,
     UserEmail: document.getElementById("email").value,
     UserName: document.getElementById("username").value,
