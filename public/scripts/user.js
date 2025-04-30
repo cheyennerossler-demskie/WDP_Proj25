@@ -58,11 +58,12 @@ function register(e) {
   let errorSection = document.getElementById("error")
 
   const user = {
-    UserName: document.getElementById("username").value,
-    UserPasswordHash: document.getElementById("password").value,
     UserFirstName: document.getElementById("firstName").value,
     UserLastName: document.getElementById("lastName").value,
-    UserEmail: document.getElementById("email").value
+    UserPhoneNumber: document.getElementById("phonenumber").value,
+    UserEmail: document.getElementById("email").value,
+    UserName: document.getElementById("username").value,
+    UserPasswordHash: document.getElementById("password").value
   }
 
   fetchData("/users/register", user, "POST")
