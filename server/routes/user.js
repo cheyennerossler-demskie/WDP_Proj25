@@ -11,15 +11,16 @@ router
         res.send(users)
     }
     catch(err){
-        res.status(401).send({message: err.message})
+        res.status(500).send({message: err.message})
     }
 })
 
 .post('/login', async (req, res) =>{
     try {
-      console.log("hi fromlogin route")
+      console.log("Login route hit");
       const user = await User.login(req.body)
-      res.send({...user, password: undefined})
+      //res.send({...user, password: undefined})
+      res.send(user)
     } catch(err) {
       res.status(401).send({message: err.message})
     }
@@ -28,7 +29,8 @@ router
 .post('/register', async (req, res) => {
     try {
         const user = await User.register(req.body)
-        res.send({...user, password: undefined})
+        //res.send({...user, password: undefined})
+        res.send(user)
     } catch(err) {
         res.status(401).send({message: err.message})
     }
@@ -37,7 +39,8 @@ router
 .put('/update', async (req, res) => {
     try {
         const user = await User.updateUsername(req.body)
-        res.send({...user, password: undefined})
+        //res.send({...user, password: undefined})
+        res.send(user)
     } catch(err) {
         res.status(401).send({message: err.message})
     }
@@ -46,7 +49,7 @@ router
 .delete('/deleteAccount', async (req, res) => {
     try {
         await User.deleteAccount(req.body)
-        res.send({success: "Fine, be that way. Bye!"})
+        res.send({success: "Account deleted sucessfully"})
     } catch(err) {
         res.status(401).send({message: err.message})
     }

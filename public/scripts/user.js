@@ -34,12 +34,12 @@ function login(e){
       console.log(err.message);
     })
 
-    let section = document.getElementById("welcome")
+    /*let section = document.getElementById("welcome")
     section.innerHTML = `Welcome, ${username}!`
-
-    console.log(user)
+    */
     }
 
+    // resets form fields
     document.getElementById('username').value = ""
     document.getElementById('password').value = ""
 }
@@ -80,7 +80,16 @@ function register(e) {
 
 // local storage functions
 function setCurrentUser(user) {
-  localStorage.setItem('user', JSON.stringify(user))
+  //localStorage.setItem('user', JSON.stringify(user))
+  // Store the user's first name and other info in localStorage
+  localStorage.setItem('user', JSON.stringify({
+    firstName: user.UserFirstName,
+    lastName: user.UserLastName,
+    username: user.UserName,
+    email: user.UserEmail,
+    phoneNumber: user.UserPhoneNumber,
+    password: user.UserPasswordHash,
+  }));
 }
 
 export function getCurrentUser() {

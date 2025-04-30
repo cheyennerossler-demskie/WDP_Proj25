@@ -29,9 +29,22 @@ async function login(user) {
   let cUser = await userExists(user.UserName)
   
   if(!cUser[0]) throw Error("Username does not exist!") 
-  if(cUser[0].UserPasswordHash != user.UserPasswordHash) throw Error("Password is incorrect!")
-    
+
+  // if(cUser[0].UserPasswordHash != user.UserPasswordHash) throw Error("Password is incorrect!")
+  /*if (!(await bcrypt.compare(user.UserPasswordHash, cUser[0].UserPasswordHash))) {
+    throw Error("Password is incorrect!");
+  }
+  
   return cUser[0]
+
+  */
+
+  const passwordMatch = await bcrypt.compare(user.UserPasswordHash, cUser[0].UserPasswordHash);
+  if (!passwordMatch) throw Error("Password is incorrect!");
+
+  // Don't return the password hash
+  const { UserPasswordHash, ...userWithoutPassword } = cUser[0];
+  return userWithoutPassword;
 }
 
 async function userExists(username) {
@@ -50,19 +63,41 @@ async function register(user) {
   // Hash the password before saving it
   const hashedPassword = await bcrypt.hash(user.UserPasswordHash, saltRounds);
 
+  /*
   let sql = `
     INSERT INTO User(UserFirstName, UserLastName, UserPhoneNumber, UserEmail, UserName, UserPasswordHash)
     VALUES("${user.UserFirstName}", "${user.UserLastName}", "${user.UserPhoneNumber}", "${user.UserEmail}", "${user.UserName}", "${hashedPassword}")
   `
-  await con.query(sql)
+  */
 
-  return await login(user)
+  let sql = `
+    INSERT INTO User(UserFirstName, UserLastName, UserPhoneNumber, UserEmail, UserName, UserPasswordHash)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+
+  //await con.query(sql)
+
+  await con.query(sql, [
+    user.UserFirstName,
+    user.UserLastName,
+    user.UserPhoneNumber,
+    user.UserEmail,
+    user.UserName,
+    hashedPassword
+  ]);
+
+  //return await login(user)
+
+  // Retrieve the newly created user and return without password
+  const newUser = await userExists(user.UserName);
+  const { UserPasswordHash, ...userWithoutPassword } = newUser[0];
+  return userWithoutPassword;
 }
 
 async function updateUsername(user) {
   let sql = `
     UPDATE User SET
-    username = "${user.username}"
+    UserName = "${user.UserName}"
     WHERE UserID = ${user.UserID}
   `
   await con.query(sql)
@@ -70,7 +105,6 @@ async function updateUsername(user) {
   return currentUser[0]
 }
 
-/*
 //U for Update - Update email of user
 async function updateEmail(user) {
   let cEmail = await getEmail(user)
@@ -93,18 +127,6 @@ async function getEmail(user) {
   let email = await con.query(sql)
   return email[0]
 }
-*/
-
-// USER Example:
-/*
-const user2 = {
-    UserName: "CheyenneRD",
-    Email: "chey@gmail.com",
-    UserPasswordHash: "cheyspass",
-    UserFirstName: "Cheyenne",
-    UserLastName: "Rossler-Demskie"
- }
-*/
 
 async function deleteAccount(user) {
   let sql = `
@@ -114,4 +136,15 @@ async function deleteAccount(user) {
   await con.query(sql)
 }
 
-module.exports = { getAllUsers, login, register, updateUsername, deleteAccount }
+// USER Example:
+/*
+const user2 = {
+    UserName: "C",
+    Email: "c@gmail.com",
+    UserPasswordHash: "cspass",
+    UserFirstName: "C",
+    UserLastName: "R"
+ }
+*/
+
+module.exports = { getAllUsers, login, register, updateUsername, updateEmail, deleteAccount }

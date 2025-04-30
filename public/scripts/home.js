@@ -5,12 +5,32 @@ const user = getCurrentUser()
 
 if(!user) window.location.href = "index.html"
 
+// Check the user object for correct structure
+console.log(user);  
+
 const home = document.getElementById("home")
 
+/*
 home.innerHTML = `
    <h1>Welcome ${user.username}!</h1>
-  <button id="deleteAccount">Delete Account</button>
+   <button id="deleteAccount">Delete Account</button>
 `
+*/
+
+// Ensure user.firstName exists, use for welcome message
+if (user && user.firstName) {
+  home.innerHTML = `
+    <h1>Welcome, ${user.firstName}!</h1>
+    <button id="deleteAccount">Delete Account</button>
+  `;
+} else {
+  // Fallback if firstName is missing
+  home.innerHTML = `
+    <h1>Welcome, user!</h1>
+    <button id="deleteAccount">Delete Account</button>
+  `;
+}
+
 
 const deleteUser = document.getElementById("deleteAccount")
 deleteUser.addEventListener('click', deleteAccount)

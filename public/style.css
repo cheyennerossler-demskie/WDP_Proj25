@@ -154,6 +154,13 @@ p{
 	cursor: pointer;
 }
 
+#deleteAccount{
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size: medium;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
 #logout {
 	cursor: pointer;
   }
