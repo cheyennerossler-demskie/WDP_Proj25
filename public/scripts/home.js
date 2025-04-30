@@ -10,27 +10,19 @@ console.log(user);
 
 const home = document.getElementById("home")
 
-/*
-home.innerHTML = `
-   <h1>Welcome ${user.username}!</h1>
-   <button id="deleteAccount">Delete Account</button>
-`
-*/
-
 // Ensure user.firstName exists, use for welcome message
 if (user && user.firstName) {
   home.innerHTML = `
-    <h1>Welcome, ${user.firstName}!</h1>
+    <h3>Welcome, ${user.firstName}!</h3>
     <button id="deleteAccount">Delete Account</button>
   `;
 } else {
   // Fallback if firstName is missing
   home.innerHTML = `
-    <h1>Welcome, user!</h1>
+    <h3>Welcome, user!</h3>
     <button id="deleteAccount">Delete Account</button>
   `;
 }
-
 
 const deleteUser = document.getElementById("deleteAccount")
 deleteUser.addEventListener('click', deleteAccount)

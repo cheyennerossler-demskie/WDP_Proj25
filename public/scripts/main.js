@@ -11,16 +11,17 @@ if(getCurrentUser()) {
 } else {
   nav.innerHTML = `
     <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="login.html">Log In</a></li>
-        <li><a href="register.html">Register</a></li>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="login.html">Log In</a></li>
+      <li><a href="register.html">Register</a></li>
     </ul>
-  `
+  `;
 }
 
 // enable logout functionality
 const logout = document.getElementById("logout")
 if(logout) logout.addEventListener('click', removeCurrentUser)
+
 
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {

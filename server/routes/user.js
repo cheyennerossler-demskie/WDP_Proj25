@@ -48,13 +48,11 @@ router
 
 .delete('/deleteAccount', async (req, res) => {
     try {
-        await User.deleteAccount(req.body)
-        res.send({success: "Account deleted sucessfully"})
+      await User.deleteAccount(req.body)
+      res.send({success: "Account Delete Successful"})
     } catch(err) {
-        res.status(401).send({message: err.message})
+      res.status(401).send({message: err.message})
     }
 })
 
-// "http://localhost:3000/users/getUsers"
-// export router
 module.exports = router

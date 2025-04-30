@@ -30,15 +30,6 @@ async function login(user) {
   
   if(!cUser[0]) throw Error("Username does not exist!") 
 
-  // if(cUser[0].UserPasswordHash != user.UserPasswordHash) throw Error("Password is incorrect!")
-  /*if (!(await bcrypt.compare(user.UserPasswordHash, cUser[0].UserPasswordHash))) {
-    throw Error("Password is incorrect!");
-  }
-  
-  return cUser[0]
-
-  */
-
   const passwordMatch = await bcrypt.compare(user.UserPasswordHash, cUser[0].UserPasswordHash);
   if (!passwordMatch) throw Error("Password is incorrect!");
 
@@ -62,13 +53,6 @@ async function register(user) {
 
   // Hash the password before saving it
   const hashedPassword = await bcrypt.hash(user.UserPasswordHash, saltRounds);
-
-  /*
-  let sql = `
-    INSERT INTO User(UserFirstName, UserLastName, UserPhoneNumber, UserEmail, UserName, UserPasswordHash)
-    VALUES("${user.UserFirstName}", "${user.UserLastName}", "${user.UserPhoneNumber}", "${user.UserEmail}", "${user.UserName}", "${hashedPassword}")
-  `
-  */
 
   let sql = `
     INSERT INTO User(UserFirstName, UserLastName, UserPhoneNumber, UserEmail, UserName, UserPasswordHash)
