@@ -2,6 +2,8 @@ const express = require("express")
 const User = require("../models/user")
 const router = express.Router()
 
+const bcrypt = require('bcrypt');
+
 // http method for each CRUD function
 router
 .get("/getUsers", async (req, res) => {

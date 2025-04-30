@@ -18,7 +18,7 @@ function login(e){
 
     const user = {
         UserName: username,
-        Password: password
+        UserPasswordHash: password
     }
 
     fetchData('/users/login', user, "POST")
@@ -59,10 +59,10 @@ function register(e) {
 
   const user = {
     UserName: document.getElementById("username").value,
-    Password: document.getElementById("password").value,
-    FirstName: document.getElementById("firstName").value,
-    LastName: document.getElementById("lastName").value,
-    Email: document.getElementById("email").value
+    UserPasswordHash: document.getElementById("password").value,
+    UserFirstName: document.getElementById("firstName").value,
+    UserLastName: document.getElementById("lastName").value,
+    UserEmail: document.getElementById("email").value
   }
 
   fetchData("/users/register", user, "POST")
