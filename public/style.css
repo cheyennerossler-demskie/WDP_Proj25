@@ -59,20 +59,31 @@ header nav ul {
 	gap: 10px;
 }
   
-header nav ul li a{
-	text-decoration: none;
-	font-size: 20px;
-	color: rgb(64, 61, 61);
+header nav ul li a,
+header nav ul li button {
+  display: inline-block;
+  background-color: rgb(218, 223, 213);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-decoration: none;
+  font-size: 20px;
+  color: rgb(64, 61, 61);
+  margin: 5px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 header nav ul li{
 	margin: 0 20px; /* horizontal spacing */
   }
 
-header nav ul li a:hover {
+header nav ul li a:hover,
+header nav ul li button:hover {
 	box-shadow: 2px 3px 2px chocolate;
 	color: black;
-}
+  }
 
 .about{
 	font-family: monospace;
@@ -149,22 +160,41 @@ p{
 
 .button{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	font-size: medium;
+	font-size: large;
 	border-radius: 8px;
 	cursor: pointer;
+	transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
 
-#deleteAccount{
+.button:hover {
+	color: white;  /* Change text color on hover */
+	background-color: rgb(63, 46, 139);
+    box-shadow: 2px 3px 2px darkorange;  /* Optional shadow effect */
+}
+
+#deleteAccount, #logout{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	font-size: medium;
+	font-size: 20px;
+	color: rgb(64, 61, 61);
+	background-color: rgb(218, 223, 213);
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap; /* allow items to wrap on smaller screens */
+	justify-content: center;
+	border: none;
+	outline: none;
 	border-radius: 8px;
 	cursor: pointer;
+	text-decoration: none;
+	padding: 8px 16px; /* Ensure consistent padding */
+	transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
 
-#logout {
-	cursor: pointer;
+#deleteAccount:hover, #logout:hover {
+	box-shadow: 2px 3px 2px red;
+	color: darkred;
   }
-  
+
 footer{
 	background-color: rgb(218, 223, 213);
 	font-size: medium;
