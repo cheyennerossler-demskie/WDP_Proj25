@@ -42,15 +42,20 @@ async function save(Note) {
   if(cNote.length > 0) throw Error("Title already in use!")
 
   let sql = `
-    INSERT INTO Note(NoteTitle, NoteContent, NoteCreationDate, NoteUpdatedDate)
-    VALUES("${Note.NoteTitle}", "${Note.NoteContent}", "${Note.NoteCreationDate}", "${Note.NoteUpdatedDate}")
+    INSERT INTO Note(NoteTitle, NoteContent)
+    VALUES("${Note.NoteTitle}", "${Note.NoteContent}")
   `
-  await con.query(sql)
+  //await con.query(sql)
+
+   await con.query(sql, [
+      Note.NoteTitle,
+      Note.NoteContent
+    ]);
 
   return await login(Note)
 }
 
-async function editTitle(Note) {
+async function updateTitle(Note) {
   let sql = `
     UPDATE Note SET
     NoteTitle = "${Note.NoteTile}"
@@ -61,11 +66,6 @@ async function editTitle(Note) {
   return currentNote[0]
 }
 
-// NOTE Example:
-const Note = {
-  NoteTitle: "April 2025",
-  NoteContent: "Test#1"
-}
 async function deleteNote(Note) {
   let sql = `
     DELETE FROM Note
@@ -74,4 +74,12 @@ async function deleteNote(Note) {
   await con.query(sql)
 }
 
-module.exports = { getAllNotes, search, save, editTitle, deleteNote }
+/*
+// NOTE Example:
+const Note = {
+  NoteTitle: "April 2025",
+  NoteContent: "Test#1"
+}
+*/
+
+module.exports = { getAllNotes, search, save, updateTitle, deleteNote }

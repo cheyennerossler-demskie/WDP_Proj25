@@ -10,10 +10,6 @@ console.log(user);
 
 const home = document.getElementById("home")
 
-home.innerHTML = `
-  <h3>Welcome, ${user.firstName}!</h3>
-`
-
 if (user && user.UserFirstName) {
   home.innerHTML = `
     <h3>Welcome, ${user.UserFirstName}!</h3>
@@ -28,33 +24,50 @@ let noteForm = document.getElementById('noteForm')
 noteForm.addEventListener('submit', save)
 
 function save(e){
-    e.preventDefault()
-    let errorSection = document.getElementById("error")
+   e.preventDefault() 
+   
+     let errorSection = document.getElementById("error")
+   
+     const note = {
+       NoteTitle: document.getElementById("title").value,
+       NoteContent: document.getElementById("note").value,
+       UserID: user.UserID
+     }
 
-    let title = document.getElementById('title').value
-    let note = document.getElementById('note').value
-    let date = document.getElementById('date').value
-
-    if(validString(title)) {
-        errorSection.innerText = `Title cannot be blank!!!`
-    } 
-    else {
-        errorSection.innerText = ""  
-        console.log(title)
-    }
-
-    const notes = {
-        title: note,
-        note: note,
-        date: date
-    }
-
-    let section = document.getElementById("saved")
-    section.innerHTML = `Saved note: ${title}`
-
-    console.log(notes)
+      fetchData("/users/save", note, "POST")
+       .then(data => {
+         if(!data.message) {
+           //etCurrentUser(data)
+           window.location.href = "home.html"
+         }
+       })
+       .catch(err => {
+         errorSection.innerText = `${err.message}`
+       })
 }
 
+function getNotes(){
+  fetchData("/users/getAllNotes")
+    .then(notes => {
+      let ul = document.getElementById("noteList");
+      ul.innerHTML = "";
+      notes.forEach(note => {
+        let li = document.createElement("li");
+        li.innerHTML = `
+          <h3>${note.NoteTitle}</h3>
+          <p>${note.NoteContent}</p>
+        `;
+        ul.appendChild(li);
+      });
+    })
+    .catch(err => {
+      console.error("Error fetching notes:", err.message);
+    });
+}
+
+getNotes();
+
+/*
 document.getElementById('title').value = ""
 document.getElementById('note').value = ""
 document.getElementById('date').value = ""
@@ -62,3 +75,4 @@ document.getElementById('date').value = ""
 function validString(word) {
     return word == ""
 }
+    */

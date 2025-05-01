@@ -88,8 +88,8 @@ export function getCurrentUser() {
 }
 
 // example accessing userId for second entity
-// let currentUser = getCurrentUser()
-// let userId = currentUser.userId
+let currentUser = getCurrentUser()
+let userId = currentUser.userId
 
 export function removeCurrentUser() {
   localStorage.removeItem('user')
