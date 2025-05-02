@@ -38,7 +38,7 @@ router
 
 .put('/update', async (req, res) => {
     try {
-        const user = await User.updateUsername(req.body)
+        const user = await User.updateUserForm(req.body)
         res.send(user)
     } catch(err) {
         res.status(401).send({message: err.message})

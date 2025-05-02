@@ -79,7 +79,7 @@ function register(e) {
 }  
 
 // local storage functions
-function setCurrentUser(user) {
+export function setCurrentUser(user) {
   localStorage.setItem('user', JSON.stringify(user))
 }
 
@@ -89,7 +89,9 @@ export function getCurrentUser() {
 
 // example accessing userId for second entity
 let currentUser = getCurrentUser()
-let userId = currentUser.userId
+// if(currentUser) {
+//   let userId = currentUser.userId
+// }
 
 export function removeCurrentUser() {
   localStorage.removeItem('user')

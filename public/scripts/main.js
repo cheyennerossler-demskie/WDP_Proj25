@@ -1,6 +1,9 @@
 import { getCurrentUser, removeCurrentUser } from "./user.js";
 const nav = document.querySelector('nav')
 
+console.log(getCurrentUser())
+
+
 if(getCurrentUser()) {
   nav.innerHTML = `
     <ul>
