@@ -3,7 +3,6 @@ const nav = document.querySelector('nav')
 
 console.log(getCurrentUser())
 
-
 if(getCurrentUser()) {
   nav.innerHTML = `
     <ul>
@@ -37,23 +36,6 @@ if (deleteButton) deleteButton.addEventListener("click", () => {
       .catch(err => console.error("Delete failed:", err))
   }
 })
-
-const logoutButton = document.getElementById('logout');
-if (logoutButton) {
-  logoutButton.addEventListener('click', function (e) {
-    // Show confirmation dialog
-    const confirmed = confirm("Are you sure you want to log out?");
-    
-    // If the user cancels the logout, prevent the default action
-    if (!confirmed) {
-      e.preventDefault(); // Prevent the default logout action
-    } else {
-      // If the user confirms, the logout action continues (this could be redirect, remove session, etc.)
-      removeCurrentUser();  // Calls your logout function
-      window.location.href = "index.html"; // Redirects to the login page or home
-    }
-  });
-}
 
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {

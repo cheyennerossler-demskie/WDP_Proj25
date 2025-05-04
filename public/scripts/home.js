@@ -58,7 +58,7 @@ if(updateUserForm) updateUserForm.addEventListener('submit', editUsername)
 function editUsername(e){
   e.preventDefault()
 
-  user.username = document.getElementByid("username").value
+  user.username = document.getElementById("username").value
 
   fetchData('/users/update', user, "PUT")
   .then(data => {
