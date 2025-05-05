@@ -57,13 +57,14 @@ function saveNote(e) {
       document.getElementById('error').innerText = data.error;
       document.getElementById('statusMessage').innerHTML = ''; // Clear previous messages
     } else {
-      document.getElementById('saved').innerText = 'Note Saved Successfully';
-      // Reset form fields
-      document.getElementById('noteForm').reset();
+      document.getElementById('statusMessage').innerHTML = '<p>Note Saved Successfully!</p>'; // Display success message
+      document.getElementById('error').innerText = ''; // Clear any previous error message
+      document.getElementById('noteForm').reset(); // Reset the form fields
     }
   })
   .catch(err => {
     document.getElementById('error').innerText = 'Failed to save note';
+    document.getElementById('statusMessage').innerHTML = ''; // Clear previous messages
     console.error('Error:', err);
   });
 }

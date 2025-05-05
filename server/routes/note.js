@@ -38,7 +38,7 @@ router
     }
   })
  
-  /*
+
 .post('/save', async (req, res) => {
 try {
     const note = await Note.save(req.body)
@@ -47,7 +47,6 @@ try {
     res.status(401).send({message: err.message})
 }
 })
-*/
 
 .post('/editTitle', async (req, res) => {
 try {

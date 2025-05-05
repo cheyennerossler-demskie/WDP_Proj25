@@ -17,7 +17,8 @@ createTable();
 // CRUD Operations
 async function getAllNotes() {
   let sql = `SELECT * FROM Note`
-  return await con.query(sql)
+  const [rows] = await con.query(sql, [UserID]);
+  return rows;
 }
 
 // READ in CRUD: Searching for a note
@@ -31,14 +32,14 @@ async function search(Note) {
 async function noteExists(Note) {
   let sql = `
     SELECT * FROM Note
-    WHERE NoteTitle="${NoteTitle}"
+    WHERE NoteTitle="${Note.NoteTitle}"
   `
   return await con.query(sql)
 }
 
 // CREATE in CRUD - Saving a note
 async function save(Note) {
-  const cNote = await noteExists(Note.Title)
+  const cNote = await noteExists(Note)
   if(cNote.length > 0) throw Error("Title already in use!")
 
   let sql = `
@@ -47,12 +48,9 @@ async function save(Note) {
   `
   //await con.query(sql)
 
-   await con.query(sql, [
-      Note.NoteTitle,
-      Note.NoteContent
-    ]);
+   await con.query(sql);
 
-  return await login(Note)
+   return Note
 }
 
 async function updateTitle(Note) {
@@ -82,4 +80,4 @@ const Note = {
 }
 */
 
-module.exports = { getAllNotes, search, save, updateTitle, deleteNote }
+module.exports = { getAllNotes, search, noteExists, save, updateTitle, deleteNote }
