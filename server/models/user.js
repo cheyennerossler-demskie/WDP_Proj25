@@ -79,17 +79,40 @@ async function register(user) {
 }
 
 async function updateUsername(user) {
-  let sql = `
-    UPDATE User SET
-    UserName = "${user.UserName}"
+  const existing = await userExists(user.UserName)
+  if (existing.length > 0 && existing[0].UserID !== user.UserID) {
+    throw Error("Username already taken.")
+  }
+
+  // Get the current user by ID to access their password hash
+  const sqlFind = `
+    SELECT * FROM User 
+    WHERE UserID = ${user.UserID}
+    `
+
+  const result = await con.query(sqlFind);
+  if (result.length === 0) throw Error("User not found.");
+  const currentUser = result[0];
+
+  // Verify password before allowing username change
+  const passwordMatch = await bcrypt.compare(user.PlainPassword, currentUser.UserPasswordHash);
+  if (!passwordMatch) throw Error("Password is incorrect.");
+
+  const sqlUpdate = `
+    UPDATE User
+    SET UserName = "${user.UserName}"
     WHERE UserID = ${user.UserID}
   `
-  await con.query(sql)
-  const currentUser = await userExists(user.username)
-  return currentUser[0]
+
+  console.log("Running SQL:", sqlUpdate); // Debugging
+  await con.query(sqlUpdate);
+
+  // Return updated user (without password)
+  const updatedUser = await userExists(user.UserName);
+  const { UserPasswordHash, ...userWithoutPassword } = updatedUser[0];
+  return userWithoutPassword;
 }
 
-//U for Update - Update email of user
 async function updateEmail(user) {
   let cEmail = await getEmail(user)
   if(cEmail) throw Error("Email already in use!!")

@@ -38,8 +38,11 @@ router
 
 .put('/update', async (req, res) => {
     try {
-        const user = await User.updateUserForm(req.body)
-        res.send(user)
+        const user = await User.updateUsername(req.body)
+        res.send({
+            message: "Username updated successfully",
+            user: user
+        })
     } catch(err) {
         res.status(401).send({message: err.message})
     }
@@ -48,7 +51,7 @@ router
 .delete('/deleteAccount', async (req, res) => {
     try {
       await User.deleteAccount(req.body)
-      res.send({success: "Account Delete Successful"})
+      res.send({message: "Account Deleted Successfully"})
     } catch(err) {
       res.status(401).send({message: err.message})
     }
