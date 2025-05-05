@@ -26,27 +26,38 @@
 		</div>
 	</header>
 	<main>
-		<!--<h3 id="welcome"></h3>-->
 		<div id="home">
 		</div>
 		<p class="prompt">Save a Note</p>
 		<div class="formContainer">
 			<h3 id="saved"></h3>
-			<form id="noteForm">
+			<form id="passwordForm">
 				<p id="error"></p>
 				<label for="title">Title:</label><br>
 				<input type="text" id="title"><br>
 				<i class="fa-solid fa-pen"></i>
 				<label for="note">Note:</label><br>
-				<textarea id="note" id="note"></textarea><br>
+				<textarea id="note"></textarea><br>
 				<label for="date">Date:</label><br>
 				<input type="date" id="date" name="date"><br>
 				<input type="submit" value="Save" class="button">
 			</form>
 		</div>
-		<div class="savedNotes">
-			<h2>Your Notes</h2>
-			<ul id="noteList"></ul>
+		<p class="prompt">Save a Password</p>
+		<div class="formContainer">
+			<h3 id="saved"></h3>
+			<form id="passwordForm">
+				<p id="error"></p>
+				<label for="title">Title:</label>
+				<input type="text" id="name"><br>
+				<i class="fa-solid fa-user"></i>
+				<label for="username">Username:</label>
+				<input type="text" id="username"><br>
+				<i class="fa-solid fa-key"></i>
+				<label for="password">Password:</label>
+				<input type="password" id="password"><br>
+				<input type="submit" value="Save" class="button">
+			</form>
 		</div>
 	</main>
 	<footer>

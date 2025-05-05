@@ -42,7 +42,7 @@ nav a {
 	margin: 5px;
 	padding: 8px;
 	border-radius: 8px;
-	display: flex;
+	display: inline-block;
 	justify-content: center;
 }
 
@@ -53,6 +53,7 @@ header nav ul {
 	justify-content: center;
 	background-color: rgb(218, 223, 213);
 	align-items: center;
+	padding: 5px;
 }
   
 header nav ul li a,
@@ -69,12 +70,8 @@ header nav ul li button {
   cursor: pointer;
   transition: all 0.3s ease;
   align-items: center;
-}
-
-header nav ul li{
-	display: flex;           /* Make li a flex container */
-	align-items: center;     /* Vertically center its contents */
-	margin: 0 20px;
+  display: flex;
+  flex-wrap: wrap; /* allow items to wrap on smaller screens */
 }
 
 header nav ul li a:hover,
@@ -148,7 +145,7 @@ p{
     width: 100%;
 }
 
-#loginForm, #registerForm, #noteForm, #updateUserForm{
+#loginForm, #registerForm, #noteForm, #passwordForm, #updateUsernameForm{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start; /*aligns content to the left*/
@@ -173,12 +170,11 @@ p{
     box-shadow: 2px 3px 2px darkorange;  /* Optional shadow effect */
 }
 
-#deleteAccount, #logout{
+#deleteAccount{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	font-size: 20px;
 	color: rgb(64, 61, 61);
 	background-color: rgb(218, 223, 213);
-	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap; /* allow items to wrap on smaller screens */
 	justify-content: center;
@@ -189,6 +185,15 @@ p{
 	text-decoration: none;
 	padding: 8px 16px; /* Ensure consistent padding */
 	transition: all 0.3s ease; /* Smooth transition for hover effects */
+	margin-left: 30%;
+	display: flex;
+    flex-direction: initial;
+	margin: 10px auto; /* centers the form */
+    padding: 12px 20px; /* side padding */
+    gap: 100px;
+    border-radius: 8px;
+    max-width: 400px;
+	align-items: center;
 }
 
 #deleteAccount:hover, #logout:hover {
@@ -226,9 +231,12 @@ footer{
 	  padding: 10px;
 	  border-radius: 20px;
 	}
+
 	#loginForm,
 	#registerForm,
-	#noteForm {
+	#noteForm,
+	#passwordForm, 
+	#updateUsernameForm{
 	  width: 90%;
 	  margin: 60px auto;
 	}

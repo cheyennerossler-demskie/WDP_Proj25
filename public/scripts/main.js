@@ -7,8 +7,8 @@ if(getCurrentUser()) {
   nav.innerHTML = `
     <ul>
         <li><a href="home.html">Home</a></li>
+         <li><a href="account.html">Account</a></li>
         <li><button id="logout">Logout</button></li>
-        <li><button id="deleteAccount">Delete Account</button></li>
     </ul>
   `
 } else {
@@ -21,21 +21,22 @@ if(getCurrentUser()) {
   `;
 }
 
-const deleteButton = document.getElementById("deleteAccount")
-if (deleteButton) deleteButton.addEventListener("click", () => {
-  if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-    const user = getCurrentUser()
-    fetchData('/users/deleteAccount', user, "DELETE")
-      .then(data => {
-        if (!data.message) {
-          console.log(data)
-          removeCurrentUser()
-          window.location.href = "index.html"
-        }
-      })
-      .catch(err => console.error("Delete failed:", err))
-  }
-})
+const logoutButton = document.getElementById('logout');
+if (logoutButton) {
+  logoutButton.addEventListener('click', function (e) {
+    // Show confirmation dialog
+    const confirmed = confirm("Are you sure you want to log out?");
+    
+    // If the user cancels the logout, prevent the default action
+    if (!confirmed) {
+      e.preventDefault(); // Prevent the default logout action
+    } else {
+      // If the user confirms, the logout action continues (this could be redirect, remove session, etc.)
+      removeCurrentUser();  // Calls your logout function
+      window.location.href = "index.html"; // Redirects to the login page or home
+    }
+  });
+}
 
 // Fetch method implementation:
 export async function fetchData(route = '', data = {}, methodType) {
