@@ -25,16 +25,27 @@ if (user && user.UserFirstName) {
     <h3>Welcome, user!</h3>
   `
 }
-
 document.getElementById('noteForm').addEventListener('submit', saveNote);
 
 function saveNote(e) {
   e.preventDefault();
   
-  const title = document.getElementById('title').value;
-  const noteContent = document.getElementById('note').value;
+  const title = document.getElementById('title').value.trim();
+  const noteContent = document.getElementById('note').value.trim();
   const date = document.getElementById('date').value;
   const user = getCurrentUser(); 
+
+  const errorEl = document.getElementById('error');
+  const statusEl = document.getElementById('statusMessage');
+  
+  errorEl.innerText = '';
+  statusEl.innerHTML = '';
+
+  // Validation check: Title, content, and date are required
+  if (!title || !noteContent || !date) {
+    errorEl.innerText = 'Please fill in Title, Note, and Date before saving.';
+    return;
+  }
 
   const note = {
     NoteTitle: title,
@@ -53,29 +64,18 @@ function saveNote(e) {
   })
   .then(response => response.json())
   .then(data => {
-    if (data.error) {
-      document.getElementById('error').innerText = data.error;
-      document.getElementById('statusMessage').innerHTML = ''; // Clear previous messages
+    if (data.error || (data.message && data.message.includes("Title already in use"))) {
+      errorEl.innerText = data.message || data.error;
+      statusEl.innerHTML = '';
     } else {
-      document.getElementById('statusMessage').innerHTML = '<p>Note Saved Successfully!</p>'; // Display success message
-      document.getElementById('error').innerText = ''; // Clear any previous error message
+      statusEl.innerHTML = '<p>Note Saved Successfully!</p>';
+      errorEl.innerText = ''; // Clear any error message
       document.getElementById('noteForm').reset(); // Reset the form fields
     }
   })
   .catch(err => {
-    document.getElementById('error').innerText = 'Failed to save note';
-    document.getElementById('statusMessage').innerHTML = ''; // Clear previous messages
+    errorEl.innerText = 'Failed to save note.';
+    statusEl.innerHTML = '';
     console.error('Error:', err);
   });
 }
-
-/*
-document.getElementById('title').value = ""
-document.getElementById('note').value = ""
-document.getElementById('date').value = ""
-
-function validString(word) {
-    return word == ""
-}
-    */
-
