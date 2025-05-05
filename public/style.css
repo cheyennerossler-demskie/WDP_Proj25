@@ -170,7 +170,7 @@ p{
 	padding: 10px;
 }
 
-.button{
+.button, #loadNotes{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	font-size: large;
 	border-radius: 8px;
@@ -181,10 +181,10 @@ p{
 .button:hover {
 	color: white;  /* Change text color on hover */
 	background-color: rgb(63, 46, 139);
-    box-shadow: 2px 3px 2px darkorange;  /* Optional shadow effect */
+    box-shadow: 2px 3px 2px chocolate;  
 }
 
-#deleteAccount{
+#deleteAccount, #loadNotes{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	font-size: 20px;
 	color: rgb(64, 61, 61);
@@ -208,6 +208,12 @@ p{
     border-radius: 8px;
     max-width: 400px;
 	align-items: center;
+}
+
+#loadNotes:hover{
+	color: white;  /* Change text color on hover */
+	background-color: chocolate;
+    box-shadow: 2px 3px 2px rgb(63, 46, 139); 
 }
 
 #deleteAccount:hover, #logout:hover {

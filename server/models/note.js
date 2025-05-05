@@ -16,7 +16,7 @@ createTable();
 
 // CRUD Operations
 async function getAllNotes() {
-  let sql = `SELECT * FROM Note`
+  let sql = `SELECT * FROM Note WHERE UserID = ?`
   const [rows] = await con.query(sql, [UserID]);
   return rows;
 }

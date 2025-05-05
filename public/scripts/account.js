@@ -12,7 +12,7 @@ if (user?.UserName) {
 }
 
 if (user?.UserName) {
-  document.getElementById("passwordPrompt").innerText = `${user.UserFirstName}'s Passwords`;
+  document.getElementById("passwordPrompt").innerText = `${user.UserFirstName}'s Passwords (coming SOON!)`;
 }
 
 if (user?.UserName) {
@@ -24,30 +24,34 @@ if (user?.UserName) {
 `
 */
 
-// Fetch the user's notes from the server
-fetch(`/note/getAllNotes?UserID=${user.UserID}`)
-  .then(response => response.json())
-  .then(notes => {
-    const notesContainer = document.getElementById('notesContainer');
-    if (notes && notes.length > 0) {
-      notes.forEach(note => {
-        const noteDiv = document.createElement('div');
-        noteDiv.classList.add('note');
-        noteDiv.innerHTML = `
-          <h4>${note.NoteTitle}</h4>
-          <p>${note.NoteContent}</p>
-          <p><small>Created on: ${new Date(note.NoteCreationDate).toLocaleString()}</small></p>
-        `;
-        notesContainer.appendChild(noteDiv);
+  document.getElementById("loadNotes").addEventListener("click", loadNotes);
+
+  function loadNotes() {
+    fetch(`/note/getAllNotes?UserID=${user.UserID}`)
+      .then(response => response.json())
+      .then(notes => {
+        const notesContainer = document.getElementById('notesContainer');
+        notesContainer.innerHTML = ""; // clear old notes
+        if (notes && notes.length > 0) {
+          notes.forEach(note => {
+            const noteDiv = document.createElement('div');
+            noteDiv.classList.add('note');
+            noteDiv.innerHTML = `
+              <h4>${note.NoteTitle}</h4>
+              <p>${note.NoteContent}</p>
+              <p><small>Created on: ${new Date(note.NoteCreationDate).toLocaleString()}</small></p>
+            `;
+            notesContainer.appendChild(noteDiv);
+          });
+        } else {
+          notesContainer.innerHTML = '<p>No notes found.</p>';
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching notes:', err);
+        document.getElementById('notesContainer').innerText = 'Failed to load notes.';
       });
-    } else {
-      notesContainer.innerHTML = '<p>No notes found.</p>';
-    }
-  })
-  .catch(err => {
-    console.error('Error fetching notes:', err);
-    document.getElementById('notesContainer').innerText = 'Failed to load notes.';
-  });
+  }
 
 let updateUsernameForm = document.getElementById('updateUsernameForm')
 if(updateUsernameForm) updateUsernameForm.addEventListener('submit', editUsername)

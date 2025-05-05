@@ -7,7 +7,7 @@ router
 .get("/getAllNotes", async (req, res) => {
     try{
         const { UserID } = req.query
-        const Notes = await Note.getAllNotes()
+        const Notes = await Note.getAllNotes(UserID)
         res.send(Notes)
     }
     catch(err){
