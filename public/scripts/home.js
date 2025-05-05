@@ -26,33 +26,47 @@ if (user && user.UserFirstName) {
   `
 }
 
-let passwordForm = document.getElementById('passwordForm')
-.addEventListener('submit', savePassword)
+document.getElementById('noteForm').addEventListener('submit', saveNote);
 
-function savePassword(e){
-   e.preventDefault() 
-   
-     let errorSection = document.getElementById("error")
-   
-     const password = {
-       PasswordTitle: document.getElementById("title").value,
-       NoteContent: document.getElementById("note").value,
-       UserID: user.UserID
-     }
+function saveNote(e) {
+  e.preventDefault();
+  
+  const title = document.getElementById('title').value;
+  const noteContent = document.getElementById('note').value;
+  const date = document.getElementById('date').value;
+  const user = getCurrentUser(); 
 
-      fetchData("/users/save", note, "POST")
-       .then(data => {
-         if(!data.message) {
-           //etCurrentUser(data)
-           window.location.href = "home.html"
-         }
-       })
-       .catch(err => {
-         errorSection.innerText = `${err.message}`
-       })
+  const note = {
+    NoteTitle: title,
+    NoteContent: noteContent,
+    NoteCreationDate: date, 
+    UserID: user.UserID
+  };
+
+  // Send the note to the server
+  fetch('/note/save', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(note),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      document.getElementById('error').innerText = data.error;
+      document.getElementById('statusMessage').innerHTML = ''; // Clear previous messages
+    } else {
+      document.getElementById('saved').innerText = 'Note Saved Successfully';
+      // Reset form fields
+      document.getElementById('noteForm').reset();
+    }
+  })
+  .catch(err => {
+    document.getElementById('error').innerText = 'Failed to save note';
+    console.error('Error:', err);
+  });
 }
-
-
 
 /*
 document.getElementById('title').value = ""

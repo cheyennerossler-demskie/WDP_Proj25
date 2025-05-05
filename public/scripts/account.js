@@ -12,12 +12,42 @@ if (user?.UserName) {
 }
 
 if (user?.UserName) {
-  document.getElementById("passwordPrompt").innerText = `${user.UserFirstsName}'s Passwords`;
+  document.getElementById("passwordPrompt").innerText = `${user.UserFirstName}'s Passwords`;
 }
 
-account.innerHTML += `
+if (user?.UserName) {
+  document.getElementById("prompt").innerText = `Update Username`;
+}
+
+/*account.innerHTML += `
    <p class="prompt">Update Username<p>
 `
+*/
+
+// Fetch the user's notes from the server
+fetch(`/note/getAllNotes?UserID=${user.UserID}`)
+  .then(response => response.json())
+  .then(notes => {
+    const notesContainer = document.getElementById('notesContainer');
+    if (notes && notes.length > 0) {
+      notes.forEach(note => {
+        const noteDiv = document.createElement('div');
+        noteDiv.classList.add('note');
+        noteDiv.innerHTML = `
+          <h4>${note.NoteTitle}</h4>
+          <p>${note.NoteContent}</p>
+          <p><small>Created on: ${new Date(note.NoteCreationDate).toLocaleString()}</small></p>
+        `;
+        notesContainer.appendChild(noteDiv);
+      });
+    } else {
+      notesContainer.innerHTML = '<p>No notes found.</p>';
+    }
+  })
+  .catch(err => {
+    console.error('Error fetching notes:', err);
+    document.getElementById('notesContainer').innerText = 'Failed to load notes.';
+  });
 
 let updateUsernameForm = document.getElementById('updateUsernameForm')
 if(updateUsernameForm) updateUsernameForm.addEventListener('submit', editUsername)
@@ -41,7 +71,7 @@ function editUsername(e){
     updateUsernameForm.reset()  
     document.getElementById("error").innerText = ""
 
-    alert(data.message)
+    document.getElementById("statusMessage").innerHTML = '<p>Username Updated Successfully!</p>';
   })
   .catch(err => {
     const errorSection = document.getElementById("error")
@@ -50,6 +80,7 @@ function editUsername(e){
     } else {
       alert(err.message)
     }
+    document.getElementById("statusMessage").innerHTML = '';
   })
 }
 

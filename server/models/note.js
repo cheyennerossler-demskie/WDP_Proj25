@@ -42,8 +42,8 @@ async function save(Note) {
   if(cNote.length > 0) throw Error("Title already in use!")
 
   let sql = `
-    INSERT INTO Note(NoteTitle, NoteContent)
-    VALUES("${Note.NoteTitle}", "${Note.NoteContent}")
+    INSERT INTO Note(NoteTitle, NoteContent, NoteCreationDate, UserID)
+    VALUES("${Note.NoteTitle}", "${Note.NoteContent}", "${Note.NoteCreationDate}", "${Note.UserID}")
   `
   //await con.query(sql)
 

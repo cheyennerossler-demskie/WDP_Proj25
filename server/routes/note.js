@@ -4,39 +4,55 @@ const router = express.Router()
 
 // http method for each CRUD function
 router
-.get("/getAllNotes", (req, res) => {
+.get("/getAllNotes", async (req, res) => {
     try{
         const { UserID } = req.query
-        const Notes = Note.getAllNotes(req.query.UserID)
+        const Notes = await Note.getAllNotes()
         res.send(Notes)
     }
     catch(err){
-        res.status(401).send({message: error.message})
+        res.status(401).send({message: err.message})
     }
 })
+
+.post('/note', async (req, res) => {
+    try {
+      const savedNote = await Note.save(req.body);
+      res.status(201).send({
+        message: "Note saved successfully!",
+        data: savedNote
+      });
+    } catch (err) {
+      res.status(400).send({
+        message: err.message || "Error saving note"
+      });
+    }
+  })
 
 .get('/search', async (req, res) =>{
     try {
       const Note = await Note.search(req.body)
-      //res.send({...Note, NoteTitle: undefined})
+      res.send(foundNote);
     } catch(err) {
       res.status(401).send({message: err.message})
     }
   })
-  
+ 
+  /*
 .post('/save', async (req, res) => {
 try {
-    const Note = await Note.save(req.body)
-    res.send({...Note, NoteTitle: undefined})
+    const note = await Note.save(req.body)
+    res.send(note)
 } catch(err) {
     res.status(401).send({message: err.message})
 }
 })
+*/
 
 .post('/editTitle', async (req, res) => {
 try {
-    const Note = await Note.editNoteTitle(req.body)
-    res.send({...NoteTitle, NoteID: undefined})
+    const note = await Note.editNoteTitle(req.body)
+    res.send(updatedNote)
 } catch(err) {
     res.status(401).send({message: err.message})
 }
@@ -44,7 +60,7 @@ try {
 
 .delete('/deletenote', async (req, res) => {
 try {
-    await User.deleteNote(req.body)
+    await Note.deleteNote(req.body)
     res.send({success: "Note Delete Successful"})
 } catch(err) {
     res.status(401).send({message: err.message})
