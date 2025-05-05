@@ -37,9 +37,11 @@ if (user?.UserName) {
             const noteDiv = document.createElement('div');
             noteDiv.classList.add('note');
             noteDiv.innerHTML = `
-              <h4>${note.NoteTitle}</h4>
-              <p>${note.NoteContent}</p>
-              <p><small>Created on: ${new Date(note.NoteCreationDate).toLocaleString()}</small></p>
+            <div class="notesContainer">
+              <h1>Title: ${note.NoteTitle}</h1>
+              <h4>Content: ${note.NoteContent}</h4>
+              <h5>Created on: ${new Date(note.NoteCreationDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</h5>
+            </div>
             `;
             notesContainer.appendChild(noteDiv);
           });
